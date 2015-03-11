@@ -20,7 +20,7 @@ public class Player extends Sprite{
     public void update(Canvas canvas)
     {
         super.update(canvas);
-        jumpHeight-=4;
+        jumpHeight-=12;
 
         if (jumpHeight < 0)
             jumpHeight = 0;

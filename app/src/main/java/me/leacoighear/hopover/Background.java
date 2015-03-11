@@ -18,7 +18,8 @@ public class Background extends Sprite {
     @Override
     public void update(Canvas canvas)
     {
-        this.x-=10;
+        if(gameView.sprite.jumpHeight > 0)
+        this.x-=15;
     }
 
     @Override

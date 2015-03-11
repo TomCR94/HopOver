@@ -20,7 +20,7 @@ public class GameView extends SurfaceView {
     private int y = 0;
     private int jump = 0;
     private int xSpeed = 1;
-    private Player sprite;
+    public Player sprite;
     private Background bg;
 
     public GameView(Context context) {

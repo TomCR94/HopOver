@@ -1,5 +1,6 @@
 package me.leacoighear.hopover;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,7 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private GameView gameView;
 
