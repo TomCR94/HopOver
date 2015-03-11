@@ -13,7 +13,7 @@ import android.view.View;
  */
 
 public class GameView extends SurfaceView {
-    private Bitmap bmp;
+    private Bitmap bmp, bgbmp;
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
     private int x = 0;
@@ -21,6 +21,7 @@ public class GameView extends SurfaceView {
     private int jump = 0;
     private int xSpeed = 1;
     private Player sprite;
+    private Background bg;
 
     public GameView(Context context) {
         super(context);
@@ -53,12 +54,15 @@ public class GameView extends SurfaceView {
                 }
         });
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.p2_front);
+        bgbmp = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         sprite = new Player(this,bmp);
+        bg = new Background(this,bgbmp,context);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.LTGRAY);
+        bg.onDraw(canvas);
         sprite.onDraw(canvas);
     }
 

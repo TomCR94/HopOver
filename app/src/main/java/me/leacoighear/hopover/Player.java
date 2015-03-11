@@ -1,6 +1,7 @@
 package me.leacoighear.hopover;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 /**
@@ -19,11 +20,16 @@ public class Player extends Sprite{
     public void update(Canvas canvas)
     {
         super.update(canvas);
-
         jumpHeight-=4;
 
         if (jumpHeight < 0)
             jumpHeight = 0;
+
+        if(this.jumpHeight != 0)
+            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.p2_jump);
+        else this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.p2_front);
+
+
     }
 
     @Override
