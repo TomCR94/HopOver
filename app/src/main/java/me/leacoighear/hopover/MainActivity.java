@@ -2,11 +2,7 @@ package me.leacoighear.hopover;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
 import android.view.WindowManager;
 
 
@@ -29,6 +25,12 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         gameView.StopView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameView.ResumeView();
     }
 }
 

@@ -1,4 +1,5 @@
 package me.leacoighear.hopover;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,7 +8,6 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 /**
  * Created by Tom on 05/03/2015.
  */
@@ -83,6 +83,12 @@ public class GameView extends SurfaceView {
     public void StopView() {
         if (gameLoopThread != null) {
             gameLoopThread.setRunning(false);
+        }
+    }
+
+    public void ResumeView() {
+        if (gameLoopThread != null) {
+            gameLoopThread.setRunning(true);
         }
     }
 }
