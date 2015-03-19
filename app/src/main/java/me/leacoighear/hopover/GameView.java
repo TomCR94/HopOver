@@ -8,6 +8,11 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import me.leacoighear.hopover.Sprites.Background;
+import me.leacoighear.hopover.Sprites.EnemyGround;
+import me.leacoighear.hopover.Sprites.Player;
+
 /**
  * Created by Tom on 05/03/2015.
  */
@@ -16,16 +21,15 @@ public class GameView extends SurfaceView {
     private Bitmap bmp, bgbmp;
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
-    private int x = 0;
-    private int y = 0;
-    private int jump = 0;
-    private int xSpeed = 1;
     public Player sprite;
+    private EnemyGround enemyGround;
     private Background bg;
+    public boolean SpecialChar;
 
-    public GameView(Context context) {
+    public GameView(Context context, boolean SpecialChar) {
         super(context);
         final GameView gameView = this;
+        this.SpecialChar = SpecialChar;
         holder = getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -53,10 +57,13 @@ public class GameView extends SurfaceView {
                                        int width, int height) {
                 }
         });
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.p2_front);
-        bgbmp = BitmapFactory.decodeResource(getResources(), R.drawable.background);
-        sprite = new Player(this,bmp);
-        bg = new Background(this,bgbmp,context);
+        if (SpecialChar)
+            bmp = BitmapFactory.decodeResource(getResources(), R.drawable.p3_front);
+        else bmp = BitmapFactory.decodeResource(getResources(), R.drawable.p2_front);
+
+        sprite = new Player(this, bmp, SpecialChar);
+        enemyGround = new EnemyGround(this, bmp);
+        bg = new Background(this, context);
     }
 
     @Override
@@ -64,6 +71,7 @@ public class GameView extends SurfaceView {
         canvas.drawColor(Color.LTGRAY);
         bg.onDraw(canvas);
         sprite.onDraw(canvas);
+        enemyGround.onDraw(canvas);
     }
 
     @Override

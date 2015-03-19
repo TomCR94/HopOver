@@ -1,8 +1,10 @@
-package me.leacoighear.hopover;
+package me.leacoighear.hopover.Sprites;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import me.leacoighear.hopover.GameView;
 
 /**
  * Created by Tom on 08/03/2015.
@@ -10,8 +12,8 @@ import android.graphics.Rect;
 public class Sprite {
     public int x = 0;
     public int y = 0;
-    private int width;
-    private int height;
+    public int width;
+    public int height;
     public GameView gameView;
     public Bitmap bmp;
     /** The source frame of the bitmap that should be drawn */
@@ -47,8 +49,15 @@ public class Sprite {
         draw(canvas);
     }
 
-    public boolean isColliding(Sprite sprite) {
-        return sprite.x > x && sprite.x < x + width && sprite.y > y && sprite.y < y + height;
+    public Rect getBounds() {
+        return new Rect(x, y, x + width, y + height);
+    }
+
+    public boolean checkCollision(Sprite sprite) {
+        Rect mySprite = this.getBounds();
+        Rect myCollisionObject = sprite.getBounds();
+        if (mySprite.intersect(myCollisionObject)) return true;
+        return false;
     }
 
     public boolean isOutOfRange(){

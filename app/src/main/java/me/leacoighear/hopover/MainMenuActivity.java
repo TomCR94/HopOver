@@ -2,8 +2,10 @@ package me.leacoighear.hopover;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 /**
@@ -13,29 +15,37 @@ public class MainMenuActivity extends Activity {
 
     protected Button playBtn;
     protected Button optionsBtn;
-    protected Button quitBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_menu);
+
 
         playBtn = (Button) findViewById(R.id.playButton);
         optionsBtn = (Button) findViewById(R.id.OptionsButton);
-        quitBtn = (Button) findViewById(R.id.QuitButton);
 
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), GameActivity.class);
+                i.putExtra("SpecialChar", false);
                 startActivity(i);
             }
         });
-
-        quitBtn.setOnClickListener(new View.OnClickListener() {
+        playBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public boolean onLongClick(View v) {
+                Intent i = new Intent(getApplicationContext(), GameActivity.class);
+                i.putExtra("SpecialChar", true);
+                startActivity(i);
+                return true;
             }
         });
     }
+
 
 }

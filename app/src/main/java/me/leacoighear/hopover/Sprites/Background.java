@@ -1,16 +1,19 @@
-package me.leacoighear.hopover;
+package me.leacoighear.hopover.Sprites;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import me.leacoighear.hopover.GameView;
+import me.leacoighear.hopover.R;
+import me.leacoighear.hopover.Utils;
 
 /**
  * Created by Tom on 09/03/2015.
  */
 public class Background extends Sprite {
 
-    public Background(GameView gameView, Bitmap bmp, Context context)
+    public Background(GameView gameView, Context context)
     {
         super(gameView, Utils.getScaledBitmapAlpha8(context, R.drawable.background));
     }
