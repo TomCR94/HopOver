@@ -24,9 +24,9 @@ public class EnemyGround extends Sprite {
     @Override
     public void update(Canvas canvas) {
         if (this.distanceMoved % 5 == 0)
-            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.slimewalk1);
+            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.slimewalkup);
         else
-            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.slimewalk2);
+            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.slimewalkdown);
 
         if (gameView.sprite.jumpHeight > 0)
             this.distanceMoved += 15;
