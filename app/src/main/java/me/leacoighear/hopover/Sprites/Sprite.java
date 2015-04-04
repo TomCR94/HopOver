@@ -44,8 +44,11 @@ public class Sprite {
     public void draw(Canvas canvas){
         canvas.drawBitmap(bmp, x , y, null);
     }
+
     public void onDraw(Canvas canvas) {
+        if (!gameView.isPaused())
         update(canvas);
+
         draw(canvas);
     }
 
@@ -67,6 +70,10 @@ public class Sprite {
     public boolean isOnGround()
     {
         return this.y == 0;
+    }
+
+    public boolean isColliding(float x2, float y2) {
+        return x2 > x && x2 < x + width && y2 > y && y2 < y + height;
     }
 
 }

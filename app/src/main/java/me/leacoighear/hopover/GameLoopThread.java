@@ -1,12 +1,13 @@
 package me.leacoighear.hopover;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 
 /**
  * Created by Tom on 05/03/2015.
  */
 public class GameLoopThread extends Thread {
-    static final long FPS = 60;
+    static final long FPS = 30;
     private GameView view;
     private boolean running = false;
 
@@ -18,6 +19,11 @@ public class GameLoopThread extends Thread {
         running = run;
     }
 
+    public boolean isRunning() {
+        return running;
+    }
+
+    @SuppressLint("WrongCall")
     @Override
     public void run() {
         long ticksPS = 1000 / FPS;

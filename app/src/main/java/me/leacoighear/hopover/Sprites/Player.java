@@ -26,7 +26,8 @@ public class Player extends Sprite {
     @Override
     public void update(Canvas canvas) {
         super.update(canvas);
-        jumpHeight -= 12;
+        if (!gameView.isPaused())
+            jumpHeight -= 12;
 
         if (jumpHeight < 0)
             jumpHeight = 0;

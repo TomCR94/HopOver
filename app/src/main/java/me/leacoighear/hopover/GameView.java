@@ -10,6 +10,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import me.leacoighear.hopover.Sprites.Background;
+import me.leacoighear.hopover.Sprites.EnemyAir;
 import me.leacoighear.hopover.Sprites.EnemyGround;
 import me.leacoighear.hopover.Sprites.Player;
 
@@ -18,13 +19,16 @@ import me.leacoighear.hopover.Sprites.Player;
  */
 
 public class GameView extends SurfaceView {
-    private Bitmap bmp, bgbmp;
+    private Bitmap bmp;
     private SurfaceHolder holder;
-    private GameLoopThread gameLoopThread;
+    public GameLoopThread gameLoopThread;
     public Player sprite;
     private EnemyGround enemyGround;
+    private EnemyAir enemyAir;
     private Background bg;
     public boolean SpecialChar;
+    public int score = 0;
+    private boolean paused = false;
 
     public GameView(Context context, boolean SpecialChar) {
         super(context);
@@ -63,6 +67,7 @@ public class GameView extends SurfaceView {
 
         sprite = new Player(this, bmp, SpecialChar);
         enemyGround = new EnemyGround(this, bmp);
+        enemyAir = new EnemyAir(this, bmp);
         bg = new Background(this, context);
     }
 
@@ -72,6 +77,7 @@ public class GameView extends SurfaceView {
         bg.onDraw(canvas);
         sprite.onDraw(canvas);
         enemyGround.onDraw(canvas);
+        enemyAir.onDraw(canvas);
     }
 
     @Override
@@ -98,5 +104,17 @@ public class GameView extends SurfaceView {
         if (gameLoopThread != null) {
             gameLoopThread.setRunning(true);
         }
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void pause() {
+        paused = true;
+    }
+
+    public void unPause() {
+        paused = false;
     }
 }
