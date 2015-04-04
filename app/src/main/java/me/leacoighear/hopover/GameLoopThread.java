@@ -7,8 +7,8 @@ import android.graphics.Canvas;
  * Created by Tom on 05/03/2015.
  */
 public class GameLoopThread extends Thread {
-    static final long FPS = 30;
-    private GameView view;
+    private static final long FPS = 30;
+    private final GameView view;
     private boolean running = false;
 
     public GameLoopThread(GameView view) {
@@ -42,13 +42,14 @@ public class GameLoopThread extends Thread {
                     view.getHolder().unlockCanvasAndPost(c);
                 }
             }
-            sleepTime = ticksPS-(System.currentTimeMillis() - startTime);
+            sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
             try {
                 if (sleepTime > 0)
                     sleep(sleepTime);
                 else
                     sleep(10);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
     }
 

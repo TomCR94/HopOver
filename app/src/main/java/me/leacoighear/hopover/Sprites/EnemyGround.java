@@ -14,7 +14,7 @@ import me.leacoighear.hopover.R;
  */
 public class EnemyGround extends Sprite {
 
-    public int distanceMoved = 0;
+    private int distanceMoved = 0;
     private Random rand;
 
     public EnemyGround(GameView gameView, Bitmap bmp) {

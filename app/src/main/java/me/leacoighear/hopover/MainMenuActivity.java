@@ -13,8 +13,8 @@ import android.widget.Button;
  */
 public class MainMenuActivity extends Activity {
 
-    protected Button playBtn;
-    protected Button optionsBtn;
+    private Button playBtn;
+    private Button optionsBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

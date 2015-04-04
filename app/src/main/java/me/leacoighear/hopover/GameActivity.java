@@ -18,6 +18,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private GameView gameView;
     private boolean specialChar;
     private ImageView boost;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         RelativeLayout gameWidgets = new RelativeLayout(this);
         Button endGameButton = new Button(this);
         boost = new ImageView(this);
-        boost.setImageResource(R.drawable.boostbar);
+        boost.setImageResource(R.drawable.barboost);
         endGameButton.setPadding(30, 30, 30, 30);
         boost.setPadding(30, 30, 30, 30);
 
@@ -46,11 +47,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
         endGameButton.setX(30);
         endGameButton.setY(30);
         endGameButton.setText("||");
-        endGameButton.setBackground(getResources().getDrawable(R.drawable.custombutton));
+        endGameButton.setBackground(getResources().getDrawable(R.drawable.buttoncustom));
         gameWidgets.addView(endGameButton);
         gameWidgets.addView(boost);
-
-
 
 
         gameView = new GameView(this, specialChar);
@@ -93,7 +92,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         dialog.show();
     }
 
-    public void setBoostPercentage(int amt) {
+    void setBoostPercentage(int amt) {
         boost.setImageLevel(amt);
     }
 }

@@ -6,6 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="play">Play</string>
     <string name="options">Options</string>
-    <string name="Version">0.0.1a</string>
+    <string name="Version">0.1.0</string>
+    <string name="instructions">Welcome to Hop Over, you are an explorer of the cosmos, sent to document the strange creatures on a newly discovered planet. You are to observe from a distance, as we don\'t know what dangers these creatures may present.\n\nTo control Spaceman tap the left half of the screen to descend, and the right half to ascend. And please, avoid the Slimers and the Buzzkills at all costs.\n&lt;END TRANSMISSION&gt;</string>
 
 </resources>

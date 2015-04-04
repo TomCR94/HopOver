@@ -26,13 +26,13 @@ public class Utils {
         bitmapOptions.inPreferredConfig = Bitmap.Config.ALPHA_8;
         bitmapOptions.inScaled = true;
         bitmapOptions.inDensity = DEFAULT_DENSITY;
-        bitmapOptions.inTargetDensity = (int)(getScaleFactor(context)*DEFAULT_DENSITY);
+        bitmapOptions.inTargetDensity = (int) (getScaleFactor(context) * DEFAULT_DENSITY);
         Bitmap b = BitmapFactory.decodeResource(context.getResources(), id, bitmapOptions);
         b.setDensity(context.getResources().getDisplayMetrics().densityDpi);
         return b;
     }
 
-    public static float getScaleFactor(Context context) {
+    private static float getScaleFactor(Context context) {
         return context.getResources().getDisplayMetrics().heightPixels / 512f;
     }
 }

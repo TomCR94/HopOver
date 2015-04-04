@@ -14,8 +14,8 @@ import me.leacoighear.hopover.R;
 public class Player extends Sprite {
 
     public int jumpHeight = 0;
-    public GameView gameView;
-    private boolean SpecialChar;
+    private final GameView gameView;
+    private final boolean SpecialChar;
 
     public Player(GameView gameView, Bitmap bmp, boolean SpecialChar) {
         super(gameView, bmp);

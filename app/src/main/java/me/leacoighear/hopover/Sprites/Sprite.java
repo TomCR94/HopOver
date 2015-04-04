@@ -10,38 +10,39 @@ import me.leacoighear.hopover.GameView;
  * Created by Tom on 08/03/2015.
  */
 public class Sprite {
-    public int x = 0;
-    public int y = 0;
-    public int width;
-    public int height;
-    public GameView gameView;
-    public Bitmap bmp;
+    int x = 0;
+    int y = 0;
+    final int width;
+    final int height;
+    final GameView gameView;
+    Bitmap bmp;
     /** The source frame of the bitmap that should be drawn */
-    protected Rect src;
+    Rect src;
 
     /** The destination area that the frame should be drawn to */
-    protected Rect dst;
+    Rect dst;
 
-    public Sprite() {
+    Sprite() {
         this.gameView = null;
         this.bmp = null;
         height = 0;
         width = 0;
     }
 
-    public Sprite(GameView gameView, Bitmap bmp) {
+    Sprite(GameView gameView, Bitmap bmp) {
         this.gameView=gameView;
         this.bmp=bmp;
         height = bmp.getHeight();
         width = bmp.getWidth();
     }
 
-    public void update(Canvas canvas) {
+    void update(Canvas canvas) {
         x = canvas.getWidth()/2 - bmp.getWidth()/2;
         y = canvas.getHeight() - bmp.getHeight();
 
     }
-    public void draw(Canvas canvas){
+
+    void draw(Canvas canvas) {
         canvas.drawBitmap(bmp, x , y, null);
     }
 
@@ -52,18 +53,17 @@ public class Sprite {
         draw(canvas);
     }
 
-    public Rect getBounds() {
+    Rect getBounds() {
         return new Rect(x, y, x + width, y + height);
     }
 
-    public boolean checkCollision(Sprite sprite) {
+    boolean checkCollision(Sprite sprite) {
         Rect mySprite = this.getBounds();
         Rect myCollisionObject = sprite.getBounds();
-        if (mySprite.intersect(myCollisionObject)) return true;
-        return false;
+        return mySprite.intersect(myCollisionObject);
     }
 
-    public boolean isOutOfRange(){
+    boolean isOutOfRange() {
         return this.x + width < 0;
     }
 

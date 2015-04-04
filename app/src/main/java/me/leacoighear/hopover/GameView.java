@@ -19,14 +19,14 @@ import me.leacoighear.hopover.Sprites.Player;
  */
 
 public class GameView extends SurfaceView {
-    private Bitmap bmp;
-    private SurfaceHolder holder;
-    public GameLoopThread gameLoopThread;
-    public Player sprite;
-    private EnemyGround enemyGround;
-    private EnemyAir enemyAir;
-    private Background bg;
-    public boolean SpecialChar;
+    private final Bitmap bmp;
+    private final SurfaceHolder holder;
+    private GameLoopThread gameLoopThread;
+    public final Player sprite;
+    private final EnemyGround enemyGround;
+    private final EnemyAir enemyAir;
+    private final Background bg;
+    public final boolean SpecialChar;
     public int score = 0;
     private boolean paused = false;
 
@@ -59,7 +59,7 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format,
                                        int width, int height) {
-                }
+            }
         });
         if (SpecialChar)
             bmp = BitmapFactory.decodeResource(getResources(), R.drawable.p3_front);
@@ -83,13 +83,13 @@ public class GameView extends SurfaceView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int i = 10;
-        while(i > 0) {
+        while (i > 0) {
             if (event.getX() < getWidth() / 2)
                 sprite.jumpHeight -= i;
             else
                 sprite.jumpHeight += i;
 
-        i--;
+            i--;
         }
         return true;
     }

@@ -14,7 +14,7 @@ import me.leacoighear.hopover.R;
  */
 public class EnemyAir extends Sprite {
 
-    public int distanceMoved = 0;
+    private int distanceMoved = 0;
     private Random rand;
 
     public EnemyAir(GameView gameView, Bitmap bmp) {
@@ -24,15 +24,15 @@ public class EnemyAir extends Sprite {
     @Override
     public void update(Canvas canvas) {
         if (this.distanceMoved % 10 == 0)
-            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.flyfly1);
+            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.fly1);
         else
-            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.flyfly2);
+            this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.fly2);
 
         if (gameView.sprite.jumpHeight > 0)
             this.distanceMoved += 15;
         rand = new Random();
         x = canvas.getWidth() + bmp.getWidth() - distanceMoved;
-        y = (int) (canvas.getHeight() / 2 - bmp.getHeight() + rand.nextInt(20));
+        y = canvas.getHeight() / 2 - bmp.getHeight() + rand.nextInt(20);
         distanceMoved += 7;
 
         if (this.isOutOfRange())

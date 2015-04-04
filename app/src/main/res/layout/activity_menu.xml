@@ -27,7 +27,8 @@
             android:layout_above="@+id/OptionsButton"
             android:layout_alignLeft="@+id/OptionsButton"
             android:layout_alignStart="@+id/OptionsButton"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttoncustom" />
 
         <Button
             android:layout_width="150dp"
@@ -36,7 +37,9 @@
             android:id="@+id/OptionsButton"
             android:layout_gravity="center_horizontal"
             android:layout_above="@+id/QuitButton"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/buttoncustom"
+            android:layout_marginTop="20dp" />
 
     </LinearLayout>
 
