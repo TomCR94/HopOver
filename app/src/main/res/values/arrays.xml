@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="numbers">
+        <item>@drawable/number0</item>
+        <item>@drawable/number1</item>
+        <item>@drawable/number2</item>
+        <item>@drawable/number3</item>
+        <item>@drawable/number4</item>
+        <item>@drawable/number5</item>
+        <item>@drawable/number6</item>
+        <item>@drawable/number7</item>
+        <item>@drawable/number8</item>
+        <item>@drawable/number9</item>
+    </string-array>
+
+</resources>

@@ -7,6 +7,23 @@
     <string name="play">Play</string>
     <string name="options">Options</string>
     <string name="Version">0.1.0</string>
-    <string name="instructions">Welcome to Hop Over, you are an explorer of the cosmos, sent to document the strange creatures on a newly discovered planet. You are to observe from a distance, as we don\'t know what dangers these creatures may present.\n\nTo control Spaceman tap the left half of the screen to descend, and the right half to ascend. And please, avoid the Slimers and the Buzzkills at all costs.\n&lt;END TRANSMISSION&gt;</string>
-
+    <string name="instructions">Welcome to Hop Over, you are an explorer of the cosmos, sent to document the strange creatures on a newly discovered planet. You are to observe from a distance, as we don\'t know what dangers these creatures may present.\n\nTo control Spaceman tap the left half of the screen to descend, and the right half to ascend. And please, avoid the Slimers and the Buzzkills at all costs.\n&lt;END TRANSMISSION></string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="prompt">Select Difficulty</string>
+    <string name="selectfps">Select FPS</string>
+    <string-array name="difficulty_array">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+    <string-array name="fps_array">
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+    </string-array>
+    <string name="prefs">HopOverPrefs</string>
+    <string name="fps">FPS</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="gameover">Game Over</string>
+    <string name="menu">Menu</string>
 </resources>

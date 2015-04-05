@@ -35,11 +35,18 @@ public class EnemyGround extends Sprite {
         y = canvas.getHeight() - bmp.getHeight();
         distanceMoved += 1 + rand.nextInt(3);
 
-        if (this.isOutOfRange())
-            this.distanceMoved = -rand.nextInt(250);
+        if (this.isOutOfRange()) {
+            this.distanceMoved = -rand.nextInt(500);
+            gameView.getGameActivity().incrementScore();
+        }
 
-        if (this.checkCollision(gameView.sprite))
-            this.distanceMoved = 0;
+        if (this.checkCollision(gameView.sprite)) {
+            this.distanceMoved = -rand.nextInt(500);
+            if (gameView.remainingBoost > -2000 * gameView.getDifficultyMultiplier())
+                gameView.editRemainingBoost((int) (-2000 * gameView.getDifficultyMultiplier()));
+            else
+                gameView.gameOver();
+        }
     }
 
 }

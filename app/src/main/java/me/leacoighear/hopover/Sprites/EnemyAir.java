@@ -3,6 +3,7 @@ package me.leacoighear.hopover.Sprites;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 
 import java.util.Random;
 
@@ -35,11 +36,23 @@ public class EnemyAir extends Sprite {
         y = canvas.getHeight() / 2 - bmp.getHeight() + rand.nextInt(20);
         distanceMoved += 7;
 
-        if (this.isOutOfRange())
-            this.distanceMoved = -rand.nextInt(250);
+        if (this.isOutOfRange()) {
+            this.distanceMoved = -rand.nextInt(500);
+            gameView.getGameActivity().incrementScore();
+        }
 
-        if (this.checkCollision(gameView.sprite))
-            this.distanceMoved = 0;
+        if (this.checkCollision(gameView.sprite)) {
+            this.distanceMoved = -rand.nextInt(500);
+            if (gameView.remainingBoost > -2000 * gameView.getDifficultyMultiplier())
+                gameView.editRemainingBoost((int) (-2000 * gameView.getDifficultyMultiplier()));
+            else
+                gameView.gameOver();
+        }
+    }
+
+    @Override
+    public Rect getBounds() {
+        return new Rect(x, y, x + width, y + height / 2);
     }
 
 }

@@ -45,6 +45,13 @@ public class MainMenuActivity extends Activity {
                 return true;
             }
         });
+        optionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
 

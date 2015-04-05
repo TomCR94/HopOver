@@ -1,6 +1,7 @@
 package me.leacoighear.hopover;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -27,14 +28,19 @@ public class GameView extends SurfaceView {
     private final EnemyAir enemyAir;
     private final Background bg;
     public final boolean SpecialChar;
-    public int score = 0;
-    private boolean paused = false;
+    public int score = 0, remainingBoost = 10000;
+    private boolean paused = false, over = false;
+    private GameActivity gameActivity;
+    private SharedPreferences prefs;
 
-    public GameView(Context context, boolean SpecialChar) {
+
+    public GameView(Context context, boolean SpecialChar, GameActivity gameActivity) {
         super(context);
         final GameView gameView = this;
         this.SpecialChar = SpecialChar;
+        this.gameActivity = gameActivity;
         holder = getHolder();
+        this.prefs = getContext().getSharedPreferences(getContext().getString(R.string.prefs), 0);
         holder.addCallback(new SurfaceHolder.Callback() {
 
             @Override
@@ -78,11 +84,17 @@ public class GameView extends SurfaceView {
         sprite.onDraw(canvas);
         enemyGround.onDraw(canvas);
         enemyAir.onDraw(canvas);
+        if (remainingBoost < 9980 && !this.isPaused())
+            remainingBoost += 15 / getDifficultyMultiplier();
+        if (!this.isPaused())
+            gameActivity.setBoost(remainingBoost);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int i = 10;
+        if (remainingBoost <= 50)
+            i = 0;
         while (i > 0) {
             if (event.getX() < getWidth() / 2)
                 sprite.jumpHeight -= i;
@@ -91,6 +103,7 @@ public class GameView extends SurfaceView {
 
             i--;
         }
+        remainingBoost -= 75 * getDifficultyMultiplier();
         return true;
     }
 
@@ -117,4 +130,35 @@ public class GameView extends SurfaceView {
     public void unPause() {
         paused = false;
     }
+
+    public float getDifficultyMultiplier() {
+        String difficulty = prefs.getString(getContext().getString(R.string.difficulty), "Medium");
+        switch (difficulty) {
+            case "Easy":
+                return 1f;
+            case "Medium":
+                return 2f;
+            case "Hard":
+                return 3.33f;
+        }
+        return 1;
+    }
+
+    public void editRemainingBoost(int amt) {
+        remainingBoost += amt;
+    }
+
+    public GameActivity getGameActivity() {
+        return gameActivity;
+    }
+
+    public void gameOver() {
+        pause();
+        this.over = true;
+    }
+
+    public boolean isOver() {
+        return over;
+    }
+
 }

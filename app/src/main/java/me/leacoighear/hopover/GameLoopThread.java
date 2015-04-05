@@ -1,13 +1,16 @@
 package me.leacoighear.hopover;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 
 /**
  * Created by Tom on 05/03/2015.
  */
 public class GameLoopThread extends Thread {
-    private static final long FPS = 30;
+
+    private SharedPreferences sharedPreferences;
+    private int FPS = 30;
     private final GameView view;
     private boolean running = false;
 
@@ -26,6 +29,8 @@ public class GameLoopThread extends Thread {
     @SuppressLint("WrongCall")
     @Override
     public void run() {
+        this.sharedPreferences = view.getContext().getSharedPreferences(view.getContext().getString(R.string.prefs), 0);
+        FPS = Integer.parseInt(sharedPreferences.getString(view.getContext().getString(R.string.fps), "30"));
         long ticksPS = 1000 / FPS;
         long startTime;
         long sleepTime;
@@ -53,5 +58,8 @@ public class GameLoopThread extends Thread {
         }
     }
 
+    public int getFPS() {
+        return FPS;
+    }
 
 }
