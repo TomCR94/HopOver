@@ -28,10 +28,11 @@ public class GameView extends SurfaceView {
     private final EnemyAir enemyAir;
     private final Background bg;
     public final boolean SpecialChar;
-    public int score = 0, remainingBoost = 10000;
+    public int score = 0, remainingBoost = 10000, lastScore, highScore;
     private boolean paused = false, over = false;
     private GameActivity gameActivity;
     private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
 
     public GameView(Context context, boolean SpecialChar, GameActivity gameActivity) {
@@ -41,6 +42,7 @@ public class GameView extends SurfaceView {
         this.gameActivity = gameActivity;
         holder = getHolder();
         this.prefs = getContext().getSharedPreferences(getContext().getString(R.string.prefs), 0);
+        this.editor = prefs.edit();
         holder.addCallback(new SurfaceHolder.Callback() {
 
             @Override
@@ -135,11 +137,11 @@ public class GameView extends SurfaceView {
         String difficulty = prefs.getString(getContext().getString(R.string.difficulty), "Medium");
         switch (difficulty) {
             case "Easy":
-                return 1f;
+                return 0.75f;
             case "Medium":
-                return 2f;
+                return 1f;
             case "Hard":
-                return 3.33f;
+                return 1.5f;
         }
         return 1;
     }
@@ -154,6 +156,12 @@ public class GameView extends SurfaceView {
 
     public void gameOver() {
         pause();
+        highScore = Integer.parseInt(prefs.getString(getContext().getString(R.string.highscore), "0"));
+        lastScore = gameActivity.getScore();
+        editor.putString(getContext().getString(R.string.lastscore), "" + lastScore);
+        if (highScore < lastScore)
+            editor.putString(getContext().getString(R.string.highscore), "" + lastScore);
+        editor.commit();
         this.over = true;
     }
 

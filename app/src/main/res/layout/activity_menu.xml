@@ -41,6 +41,15 @@
             android:background="@drawable/buttoncustom"
             android:layout_marginTop="20dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/menuhighscore"
+            android:layout_gravity="center_horizontal"
+            android:padding="60dp" />
+
     </LinearLayout>
 
     <TextView

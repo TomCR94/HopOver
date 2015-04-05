@@ -26,4 +26,6 @@
     <string name="difficulty">Difficulty</string>
     <string name="gameover">Game Over</string>
     <string name="menu">Menu</string>
+    <string name="highscore">High Score</string>
+    <string name="lastscore">Last Score</string>
 </resources>

@@ -3,6 +3,7 @@ package me.leacoighear.hopover.Sprites;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 
 import java.util.Random;
 
@@ -42,11 +43,16 @@ public class EnemyGround extends Sprite {
 
         if (this.checkCollision(gameView.sprite)) {
             this.distanceMoved = -rand.nextInt(500);
-            if (gameView.remainingBoost > -2000 * gameView.getDifficultyMultiplier())
+            if (gameView.remainingBoost - (2000 * gameView.getDifficultyMultiplier()) > 0)
                 gameView.editRemainingBoost((int) (-2000 * gameView.getDifficultyMultiplier()));
             else
                 gameView.gameOver();
         }
+    }
+
+    @Override
+    public Rect getBounds() {
+        return new Rect(x, y, x + width * 2 / 3, y + height);
     }
 
 }

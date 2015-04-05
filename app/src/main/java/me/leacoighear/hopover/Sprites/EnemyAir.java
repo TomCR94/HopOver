@@ -24,7 +24,7 @@ public class EnemyAir extends Sprite {
 
     @Override
     public void update(Canvas canvas) {
-        if (this.distanceMoved % 10 == 0)
+        if (this.distanceMoved % 9 == 0)
             this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.fly1);
         else
             this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.fly2);
@@ -43,7 +43,7 @@ public class EnemyAir extends Sprite {
 
         if (this.checkCollision(gameView.sprite)) {
             this.distanceMoved = -rand.nextInt(500);
-            if (gameView.remainingBoost > -2000 * gameView.getDifficultyMultiplier())
+            if (gameView.remainingBoost - (2000 * gameView.getDifficultyMultiplier()) > 0)
                 gameView.editRemainingBoost((int) (-2000 * gameView.getDifficultyMultiplier()));
             else
                 gameView.gameOver();
@@ -52,7 +52,7 @@ public class EnemyAir extends Sprite {
 
     @Override
     public Rect getBounds() {
-        return new Rect(x, y, x + width, y + height / 2);
+        return new Rect(x + 17, y, x + width, y + height / 2);
     }
 
 }

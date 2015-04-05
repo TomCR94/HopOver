@@ -3,6 +3,7 @@ package me.leacoighear.hopover;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,10 +27,11 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private GameView gameView;
     private boolean specialChar;
     private ImageView boost;
-    private TextView score;
+    public TextView score, scoreText;
     private int remainingBoost = 0, scoreNo = 0;
     final Handler myHandler = new Handler();
     private Dialog pauseDialog, gameOverDialog;
+    private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Intent i = getIntent();
         specialChar = i.getExtras().getBoolean("SpecialChar");
-
+        this.prefs = getSharedPreferences(getString(R.string.prefs), 0);
 
         pauseDialog = new Dialog(this);
         pauseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -59,6 +61,8 @@ public class GameActivity extends Activity implements View.OnClickListener {
         gameOverDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         gameOverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         gameOverDialog.setContentView(R.layout.gameoverdialog);
+        scoreText = (TextView) gameOverDialog.findViewById(R.id.scoreText);
+        scoreText.setText("" + scoreNo);
         gameOverDialog.setCancelable(false);
         Button menuButton = (Button) gameOverDialog.findViewById(R.id.menuButton);
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +153,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         public void run() {
             boost.setImageLevel(remainingBoost);
             score.setText("" + scoreNo);
+            scoreText.setText("Score\n" + scoreNo);
             if (gameView.isOver())
                 gameOverDialog.show();
         }
@@ -160,6 +165,10 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     public void incrementScore() {
         scoreNo++;
+    }
+
+    public int getScore() {
+        return scoreNo;
     }
 
 }
