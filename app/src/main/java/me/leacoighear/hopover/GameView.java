@@ -73,6 +73,7 @@ public class GameView extends SurfaceView {
             bmp = BitmapFactory.decodeResource(getResources(), R.drawable.p3_front);
         else bmp = BitmapFactory.decodeResource(getResources(), R.drawable.p2_front);
 
+
         sprite = new Player(this, bmp, SpecialChar);
         enemyGround = new EnemyGround(this, bmp);
         enemyAir = new EnemyAir(this, bmp);

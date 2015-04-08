@@ -145,7 +145,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
     }
 
     private void UpdateGUI() {
-        //tv.setText(String.valueOf(i));
         myHandler.post(myRunnable);
     }
 
