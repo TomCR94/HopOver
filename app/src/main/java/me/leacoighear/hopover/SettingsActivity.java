@@ -1,12 +1,14 @@
 package me.leacoighear.hopover;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 
 
@@ -26,20 +28,6 @@ public class SettingsActivity extends Activity {
         this.sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.prefs), 0);
         this.editor = this.sharedPreferences.edit();
 
-        Spinner fps = (Spinner) findViewById(R.id.fpsspinner);
-        fps.setSelection(getIndex(R.array.fps_array, sharedPreferences.getString(getString(R.string.fps), "30")));
-        fps.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editor.putString(getString(R.string.fps), parent.getSelectedItem().toString());
-                editor.commit();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
         Spinner difficulty = (Spinner) findViewById(R.id.difficultyspinner);
         difficulty.setSelection(getIndex(R.array.difficulty_array, sharedPreferences.getString(getString(R.string.difficulty), "Medium")));
         difficulty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -55,6 +43,17 @@ public class SettingsActivity extends Activity {
         });
 
 
+        Button reset = (Button) findViewById(R.id.resetbutton);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.clear();
+                editor.commit();
+                Intent i = new Intent(getApplicationContext(), MainMenuActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
     public int getIndex(int ID, String value) {

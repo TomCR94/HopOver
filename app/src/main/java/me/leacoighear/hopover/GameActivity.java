@@ -3,8 +3,8 @@ package me.leacoighear.hopover;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -27,11 +27,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private GameView gameView;
     private boolean specialChar;
     private ImageView boost;
-    public TextView score, scoreText;
+    public TextView scoreText;
     private int remainingBoost = 0, scoreNo = 0;
     final Handler myHandler = new Handler();
     private Dialog pauseDialog, gameOverDialog;
-    private SharedPreferences prefs;
+    ImageView centerNo;
+    ImageView leftNo;
+    ImageView rightNo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Intent i = getIntent();
         specialChar = i.getExtras().getBoolean("SpecialChar");
-        this.prefs = getSharedPreferences(getString(R.string.prefs), 0);
 
         pauseDialog = new Dialog(this);
         pauseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -78,14 +79,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
         FrameLayout game = new FrameLayout(this);
         RelativeLayout gameWidgets = new RelativeLayout(this);
 
-        score = new TextView(this);
-        score.setText("0");
-        score.setPadding(30, 30, 30, 30);
-        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        textParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        score.setLayoutParams(textParams);
-
         Button endGameButton = new Button(this);
         boost = new ImageView(this);
         boost.setImageResource(R.drawable.barboost);
@@ -97,6 +90,31 @@ public class GameActivity extends Activity implements View.OnClickListener {
         boostParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         boost.setLayoutParams(boostParams);
 
+        centerNo = new ImageView(this);
+        leftNo = new ImageView(this);
+        rightNo = new ImageView(this);
+        centerNo.setId(R.id.centerNo);
+        leftNo.setId(R.id.leftNo);
+        rightNo.setId(R.id.RightNo);
+        centerNo.setPadding(0, 20, 0, 0);
+        leftNo.setPadding(0, 20, 0, 0);
+        rightNo.setPadding(0, 20, 0, 0);
+        centerNo.setImageDrawable(getResources().getDrawable(R.drawable.number0));
+        leftNo.setImageDrawable(getResources().getDrawable(R.drawable.number0));
+        rightNo.setImageDrawable(getResources().getDrawable(R.drawable.number0));
+        RelativeLayout.LayoutParams number = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        number.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        centerNo.setLayoutParams(number);
+        number = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        number.addRule(RelativeLayout.RIGHT_OF, R.id.centerNo);
+        rightNo.setLayoutParams(number);
+        number = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        number.addRule(RelativeLayout.LEFT_OF, R.id.centerNo);
+        leftNo.setLayoutParams(number);
+
 
         endGameButton.setWidth(60);
         endGameButton.setX(30);
@@ -105,8 +123,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
         endGameButton.setBackground(getResources().getDrawable(R.drawable.buttoncustom));
         gameWidgets.addView(endGameButton);
         gameWidgets.addView(boost);
-        gameWidgets.addView(score);
-
+        gameWidgets.addView(centerNo);
+        gameWidgets.addView(leftNo);
+        gameWidgets.addView(rightNo);
 
         gameView = new GameView(this, specialChar, this);
 
@@ -151,7 +170,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     final Runnable myRunnable = new Runnable() {
         public void run() {
             boost.setImageLevel(remainingBoost);
-            score.setText("" + scoreNo);
+            setScore(scoreNo);
             scoreText.setText("Score\n" + scoreNo);
             if (gameView.isOver())
                 gameOverDialog.show();
@@ -168,6 +187,15 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     public int getScore() {
         return scoreNo;
+    }
+
+    public void setScore(int score) {
+        TypedArray imgs = getResources().obtainTypedArray(R.array.numbers);
+        int[] nos = Utils.getNoSplit(score);
+        leftNo.setImageDrawable(getResources().getDrawable(imgs.getResourceId(nos[0], -1)));
+        centerNo.setImageDrawable(getResources().getDrawable(imgs.getResourceId(nos[1], -1)));
+        rightNo.setImageDrawable(getResources().getDrawable(imgs.getResourceId(nos[2], -1)));
+        imgs.recycle();
     }
 
 }

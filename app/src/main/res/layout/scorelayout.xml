@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/centerNo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/number0"
@@ -17,18 +17,18 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+        android:id="@+id/leftNo"
         android:background="@drawable/number0"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/imageView"
+        android:layout_toStartOf="@+id/centerNo"
         android:layout_marginTop="30dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
+        android:id="@+id/RightNo"
         android:background="@drawable/number0"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/imageView" />
+        android:layout_toEndOf="@+id/centerNo" />
 </RelativeLayout>

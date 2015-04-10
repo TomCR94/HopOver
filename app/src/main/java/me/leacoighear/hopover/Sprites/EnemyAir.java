@@ -1,5 +1,6 @@
 package me.leacoighear.hopover.Sprites;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,6 +10,7 @@ import java.util.Random;
 
 import me.leacoighear.hopover.GameView;
 import me.leacoighear.hopover.R;
+import me.leacoighear.hopover.Utils;
 
 /**
  * Created by Tom on 18/03/2015.
@@ -17,9 +19,11 @@ public class EnemyAir extends Sprite {
 
     private int distanceMoved = 0;
     private Random rand;
+    private Context context;
 
-    public EnemyAir(GameView gameView, Bitmap bmp) {
+    public EnemyAir(GameView gameView, Bitmap bmp, Context context) {
         super(gameView, bmp);
+        this.context = context;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class EnemyAir extends Sprite {
             this.bmp = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.fly2);
 
         if (gameView.sprite.jumpHeight > 0)
-            this.distanceMoved += 15;
+            this.distanceMoved += Utils.getScaledHoriontalMovement(context);
         rand = new Random();
         x = canvas.getWidth() + bmp.getWidth() - distanceMoved;
         y = canvas.getHeight() / 2 - bmp.getHeight() + rand.nextInt(20);

@@ -28,7 +28,7 @@ public class GameView extends SurfaceView {
     private final EnemyAir enemyAir;
     private final Background bg;
     public final boolean SpecialChar;
-    public int score = 0, remainingBoost = 10000, lastScore, highScore;
+    public int remainingBoost = 10000, lastScore, highScore;
     private boolean paused = false, over = false;
     private GameActivity gameActivity;
     private SharedPreferences prefs;
@@ -75,8 +75,8 @@ public class GameView extends SurfaceView {
 
 
         sprite = new Player(this, bmp, SpecialChar);
-        enemyGround = new EnemyGround(this, bmp);
-        enemyAir = new EnemyAir(this, bmp);
+        enemyGround = new EnemyGround(this, bmp, context);
+        enemyAir = new EnemyAir(this, bmp, context);
         bg = new Background(this, context);
     }
 
@@ -86,6 +86,7 @@ public class GameView extends SurfaceView {
         bg.onDraw(canvas);
         sprite.onDraw(canvas);
         enemyGround.onDraw(canvas);
+        if (getGameActivity().getScore() > 10)
         enemyAir.onDraw(canvas);
         if (remainingBoost < 9980 && !this.isPaused())
             remainingBoost += 15 / getDifficultyMultiplier();

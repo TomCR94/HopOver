@@ -22,15 +22,9 @@ public class GameLoopThread extends Thread {
         running = run;
     }
 
-    public boolean isRunning() {
-        return running;
-    }
-
     @SuppressLint("WrongCall")
     @Override
     public void run() {
-        this.sharedPreferences = view.getContext().getSharedPreferences(view.getContext().getString(R.string.prefs), 0);
-        FPS = Integer.parseInt(sharedPreferences.getString(view.getContext().getString(R.string.fps), "30"));
         long ticksPS = 1000 / FPS;
         long startTime;
         long sleepTime;
@@ -56,10 +50,6 @@ public class GameLoopThread extends Thread {
             } catch (Exception e) {
             }
         }
-    }
-
-    public int getFPS() {
-        return FPS;
     }
 
 }

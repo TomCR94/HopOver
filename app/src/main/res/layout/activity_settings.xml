@@ -13,21 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="FPS"
-        android:id="@+id/textView2" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fpsspinner"
-        android:entries="@array/fps_array"
-        android:prompt="@string/selectfps"
-        android:background="@drawable/buttoncustom" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Difficulty"
         android:id="@+id/textView3" />
 
@@ -37,5 +22,19 @@
         android:id="@+id/difficultyspinner"
         android:entries="@array/difficulty_array"
         android:prompt="@string/prompt"
+        android:background="@drawable/buttoncustom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/reset"
+        android:id="@+id/textView2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resetbutton"
+        android:id="@+id/resetbutton"
         android:background="@drawable/buttoncustom" />
 </LinearLayout>
